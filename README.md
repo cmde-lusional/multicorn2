@@ -199,6 +199,57 @@ IF NOT EXISTS (
 );
 ```
 
+## Troubleshooting
+
+Postgres config file
+
+```
+$ psql -U postgres -c 'SHOW config_file'
+/etc/postgresql/13/main/postgresql.conf
+```
+
+Postgres log file (journalctl can also be used)
+
+```
+tail -50 /var/log/postgresql/postgresql-13-main.log
+```
+
+Multicore installation path
+
+```
+pip3 show multicorn
+/usr/local/lib/python3.8/dist-packages/multicorn-2.3-py3.8-linux-x86_64.egg/multicorn/
+```
+
+## Uninstall steps
+Postgres
+
+```
+apt-get purge postgresql postgresql-13 postgresql-client-common postgresql-common postgresql-contrib
+
+##test (both commands should not output any related data)
+psql --version
+dpkg -l | grep postgres
+```
+
+Multicorn (can use pip3 because makefile make installation will use pip3 too)
+```
+DROP EXTENSION multicorn;
+DROP SERVER alchemy_srv;
+DROP FOREIGN TABLE patient;
+
+pip3 uninstall multicorn
+
+sudo rm -rf /usr/local/lib/python3.8/dist-packages/multicorn*
+sudo rm -rf /usr/share/postgresql/13/extension/multicorn*
+sudo rm -rf /usr/lib/postgresql/13/lib/bitcode/multicorn*
+sudo rm -rf /usr/lib/postgresql/13/lib/multicorn*
+sudo rm -rf /usr/share/doc/postgresql-doc-13/extension/multicorn*
+
+sudo systemctl restart postgresql
+```
+
+
 
 ====================================================================================================================================================================================
 
