@@ -374,6 +374,14 @@ class SqlAlchemyFdw(ForeignDataWrapper):
             rs = list(rs)
 
         for item in rs:
+            row = dict(item)
+            for column_name in row:
+                if isinstance(row[column_name], dict) or isinstance(row[column_name], list):
+                    row[column_name] = json.dumps(row[column_name])
+            yield row
+
+
+        for item in rs:
             yield dict(item)
 
     @property

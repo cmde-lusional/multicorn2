@@ -28,7 +28,7 @@ preflight-check:
 	$(srcdir)/preflight-check.sh
 
 python_code: setup.py
-	pip${python_version} install .
+	pip3 install .
 
 release-zip: all
 	git archive --format zip --prefix=multicorn-$(EXTVERSION)/ --output ./multicorn-$(EXTVERSION).zip HEAD
