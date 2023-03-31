@@ -150,6 +150,7 @@ such as pymysql):
 
 """
 
+import json
 from . import ForeignDataWrapper, TableDefinition, ColumnDefinition
 from .utils import log_to_postgres, ERROR, WARNING, DEBUG
 from sqlalchemy import create_engine

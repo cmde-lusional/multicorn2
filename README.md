@@ -218,7 +218,7 @@ Multicore installation path
 
 ```
 pip3 show multicorn
-/usr/local/lib/python3.8/dist-packages/multicorn-2.3-py3.8-linux-x86_64.egg/multicorn/
+/usr/local/lib/python3.7/dist-packages/multicorn
 ```
 
 ## Uninstall steps
